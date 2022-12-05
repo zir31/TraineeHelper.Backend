@@ -4,8 +4,8 @@ namespace TraineeHelper.Domain
 {
     public class Trainee
     {
-        Guid Id { get; set; }
-        string FullName { get; set; }
-        IEnumerable<string> Skills { get; set; }
+        public Guid Id { get; set; }
+        public string FullName { get; set; }
+        public IEnumerable<string> Skills { get; set; }
     }
 }
