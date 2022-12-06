@@ -11,6 +11,6 @@ namespace TraineeHelper.Application.Common.Mappings
     {
         void Mapping(Profile profile) =>
             profile.CreateMap(typeof(T), GetType());
-}
+    }
 }
 

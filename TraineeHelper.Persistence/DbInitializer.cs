@@ -1,7 +1,7 @@
 ﻿namespace TraineeHelper.Persistence;
 public class DbInitializer
 {
-    public static void Initialize(TraineesDbContext dbContext)
+    public static void Initialize(LearningSessionsDbContext dbContext)
     {
         dbContext.Database.EnsureCreated();
     }

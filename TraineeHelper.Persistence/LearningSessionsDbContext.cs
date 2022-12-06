@@ -4,14 +4,14 @@ using TraineeHelper.Domain;
 using TraineeHelper.Persistence.EntityTypeConfigurations;
 
 namespace TraineeHelper.Persistence;
-public class TraineesDbContext : DbContext, ITraineesDbContext
+public class LearningSessionsDbContext : DbContext, ILearningSessionsDbContext
 {
-    public DbSet<Trainee> Trainees { get; set; }
-    public TraineesDbContext(DbContextOptions<TraineesDbContext> options) 
+    public DbSet<LearningSession> LearningSessions { get; set; }
+    public LearningSessionsDbContext(DbContextOptions<LearningSessionsDbContext> options)
         : base(options) { }
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.ApplyConfiguration(new TraineeConfiguration());
+        builder.ApplyConfiguration(new LearningSessionConfiguration());
         base.OnModelCreating(builder);
     }
 }
