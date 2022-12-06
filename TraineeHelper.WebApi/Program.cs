@@ -4,6 +4,7 @@ using TraineeHelper.Application.Common.Mappings;
 using TraineeHelper.Application.Interfaces;
 using TraineeHelper.Persistence;
 using Microsoft.Extensions.Configuration;
+using TraineeHelper.WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,9 +43,11 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 
     }
 }
+app.UseCastomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+
 
 app.UseEndpoints(endpoints =>
 {
