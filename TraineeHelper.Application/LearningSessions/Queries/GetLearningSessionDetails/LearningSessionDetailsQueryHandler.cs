@@ -12,7 +12,7 @@ using TraineeHelper.Domain;
 
 namespace TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
 public class LearningSessionDetailsQueryHandler 
-    : IRequestHandler<GetLearningSessionDetailsQuerry, LearningSessionDetailsVm>
+    : IRequestHandler<GetLearningSessionDetailsQuery, LearningSessionDetailsVm>
 {
     private readonly ILearningSessionsDbContext _dbContext;
     private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ public class LearningSessionDetailsQueryHandler
         _mapper = mapper;
     }
 
-    public async Task<LearningSessionDetailsVm> Handle(GetLearningSessionDetailsQuerry request, 
+    public async Task<LearningSessionDetailsVm> Handle(GetLearningSessionDetailsQuery request, 
         CancellationToken cancellationToken)
     {
         var entity = await _dbContext.LearningSessions

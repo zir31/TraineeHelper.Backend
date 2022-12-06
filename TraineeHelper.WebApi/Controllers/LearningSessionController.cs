@@ -9,7 +9,7 @@ using TraineeHelper.WebApi.Models;
 
 namespace TraineeHelper.WebApi.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller] ")]
 public class LearningSessionController : BaseController
 {
     private readonly IMapper _mapper;
@@ -31,7 +31,7 @@ public class LearningSessionController : BaseController
     [HttpGet("{id}")]
     public async Task<ActionResult<LearningSessionDetailsVm>> Get(Guid id)
     {
-        var query = new GetLearningSessionDetailsQuerry()
+        var query = new GetLearningSessionDetailsQuery()
         {
             TraineeId = TraineeId,
             Id = id

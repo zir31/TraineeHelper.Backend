@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 
 namespace TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
-public class GetLearningSessionDetailsQuerry : IRequest<LearningSessionDetailsVm>
+public class GetLearningSessionDetailsQuery : IRequest<LearningSessionDetailsVm>
 {
     public Guid TraineeId { get; set; }
     public Guid Id { get; set; }
