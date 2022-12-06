@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using TraineeHelper.Application.Interfaces;
 
 namespace TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionList;
-public class GetLearningSessionListHandler : IRequestHandler<GetLearningSessionList, LearningSessionListVm>
+public class GetLearningSessionListHandler : IRequestHandler<GetLearningSessionsListQuery, LearningSessionListVm>
 {
     private readonly ILearningSessionsDbContext _dbContext;
     private readonly IMapper _mapper;
