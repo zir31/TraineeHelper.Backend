@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
 using TraineeHelper.Application.LearningSessions.Commands.DeleteLearnignSession;
 using TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
@@ -9,7 +10,7 @@ using TraineeHelper.WebApi.Models;
 
 namespace TraineeHelper.WebApi.Controllers;
 
-[Route("api/[controller] ")]
+[Route("api/[controller]")]
 public class LearningSessionController : BaseController
 {
     private readonly IMapper _mapper;
@@ -18,6 +19,7 @@ public class LearningSessionController : BaseController
         _mapper = mapper;
     }
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<LearningSessionListVm>> GetAll()
     {
         var query = new GetLearningSessionsListQuery()
@@ -29,6 +31,7 @@ public class LearningSessionController : BaseController
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<LearningSessionDetailsVm>> Get(Guid id)
     {
         var query = new GetLearningSessionDetailsQuery()
@@ -41,6 +44,7 @@ public class LearningSessionController : BaseController
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult<Guid>> Create([FromBody] CreateLearningSessionDTO createLSDTO)
     {
         var command = _mapper.Map<CreateLearningSessionCommand>(createLSDTO);
@@ -50,6 +54,7 @@ public class LearningSessionController : BaseController
     }
 
     [HttpPut]
+    [Authorize]
     public async Task<IActionResult> Update([FromBody] UpdateLearningSessionDTO updateLSDTO)
     {
         var command = _mapper.Map<UpdateLearningSessionCommand>(updateLSDTO);
@@ -59,6 +64,7 @@ public class LearningSessionController : BaseController
     }
 
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> Delete(Guid id)
     {
         var command = new DeleteLearningSessionCommand()

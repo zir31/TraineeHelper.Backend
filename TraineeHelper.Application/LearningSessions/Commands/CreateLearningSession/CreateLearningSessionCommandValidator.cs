@@ -9,6 +9,6 @@ public class CreateLearningSessionCommandValidator :AbstractValidator<CreateLear
         RuleFor(createLSCommand =>
             createLSCommand.TraineeId).NotEqual(Guid.Empty);
         RuleFor(createLSCommand =>
-            createLSCommand.SkillsLearned).NotEmpty();
+            createLSCommand.SkillsToLearn).NotEmpty();
     }
 }

@@ -11,13 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6E947303-B00A-45A3-8273-ABFDB831C8D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraineeHelper.Domain", "TraineeHelper.Domain\TraineeHelper.Domain.csproj", "{A321D799-5D17-4874-A3C9-FFF1B256D1FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeHelper.Domain", "TraineeHelper.Domain\TraineeHelper.Domain.csproj", "{A321D799-5D17-4874-A3C9-FFF1B256D1FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraineeHelper.Application", "TraineeHelper.Application\TraineeHelper.Application.csproj", "{4ED0C312-6460-4065-8D91-228738D5EEA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeHelper.Application", "TraineeHelper.Application\TraineeHelper.Application.csproj", "{4ED0C312-6460-4065-8D91-228738D5EEA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraineeHelper.Persistence", "TraineeHelper.Persistence\TraineeHelper.Persistence.csproj", "{D4894E0A-A768-4125-A5F0-002D44AFC60B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeHelper.Persistence", "TraineeHelper.Persistence\TraineeHelper.Persistence.csproj", "{D4894E0A-A768-4125-A5F0-002D44AFC60B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraineeHelper.WebApi", "TraineeHelper.WebApi\TraineeHelper.WebApi.csproj", "{C6127D7D-E58F-40B9-94FB-2FC5B41027AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeHelper.WebApi", "TraineeHelper.WebApi\TraineeHelper.WebApi.csproj", "{C6127D7D-E58F-40B9-94FB-2FC5B41027AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraineeHelper.Tests", "TraineeHelper.Tests\TraineeHelper.Tests.csproj", "{B3AEC8BE-EEE5-422B-B282-2FDEC4995539}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4ED0C312-6460-4065-8D91-228738D5EEA6} = {4ED0C312-6460-4065-8D91-228738D5EEA6}
+		{D4894E0A-A768-4125-A5F0-002D44AFC60B} = {D4894E0A-A768-4125-A5F0-002D44AFC60B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +47,10 @@ Global
 		{C6127D7D-E58F-40B9-94FB-2FC5B41027AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6127D7D-E58F-40B9-94FB-2FC5B41027AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6127D7D-E58F-40B9-94FB-2FC5B41027AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3AEC8BE-EEE5-422B-B282-2FDEC4995539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3AEC8BE-EEE5-422B-B282-2FDEC4995539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3AEC8BE-EEE5-422B-B282-2FDEC4995539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3AEC8BE-EEE5-422B-B282-2FDEC4995539}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +60,7 @@ Global
 		{4ED0C312-6460-4065-8D91-228738D5EEA6} = {89EC47A6-E6D0-4988-9321-15D914F1402E}
 		{D4894E0A-A768-4125-A5F0-002D44AFC60B} = {AAAD5E5F-4626-44AF-AB24-796630748383}
 		{C6127D7D-E58F-40B9-94FB-2FC5B41027AA} = {0625E567-92B9-43F0-9E93-1D7CC3DCB97E}
+		{B3AEC8BE-EEE5-422B-B282-2FDEC4995539} = {6E947303-B00A-45A3-8273-ABFDB831C8D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14539C87-C027-4362-BCF7-83119ACB6BA7}

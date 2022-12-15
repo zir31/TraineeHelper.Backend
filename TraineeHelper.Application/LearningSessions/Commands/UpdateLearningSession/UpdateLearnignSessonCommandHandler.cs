@@ -6,11 +6,11 @@ using TraineeHelper.Application.Interfaces;
 using TraineeHelper.Domain;
 
 namespace TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
-public class UpdateLearnignSessonHandler 
+public class UpdateLearnignSessonCommandHandler 
     : IRequestHandler<UpdateLearningSessionCommand>
 {
     private readonly ILearningSessionsDbContext _dbContext;
-    public UpdateLearnignSessonHandler(ILearningSessionsDbContext learningSessionsDbContext) =>
+    public UpdateLearnignSessonCommandHandler(ILearningSessionsDbContext learningSessionsDbContext) =>
         _dbContext = learningSessionsDbContext;
     public async Task<Unit> Handle(UpdateLearningSessionCommand request, CancellationToken cancellationToken)
     {
@@ -22,6 +22,7 @@ public class UpdateLearnignSessonHandler
             throw new NotFoundException(nameof(LearningSession), request.Id);
 
         entity.TraineeName = request.TraineeName;
+        //entity.SkillsToLearn = request.SkillsToLearn;
         entity.SkillsLearned = request.SkillsLearned;
         entity.EditDate = DateTime.Now;
 

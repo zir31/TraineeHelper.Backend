@@ -5,6 +5,7 @@ using TraineeHelper.Application.Interfaces;
 using TraineeHelper.Persistence;
 using Microsoft.Extensions.Configuration;
 using TraineeHelper.WebApi.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,19 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin();
     });
 });
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme =
+        JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme =
+        JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:44352/";
+        options.Audience = "TraineeHelperWebAPI";
+        options.RequireHttpsMetadata = false;
+    });
 
     
 
@@ -47,6 +61,8 @@ app.UseCastomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.UseEndpoints(endpoints =>

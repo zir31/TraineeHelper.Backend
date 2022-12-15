@@ -11,12 +11,12 @@ using TraineeHelper.Application.Interfaces;
 using TraineeHelper.Domain;
 
 namespace TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
-public class LearningSessionDetailsQueryHandler 
+public class GetLearningSessionDetailsQueryHandler 
     : IRequestHandler<GetLearningSessionDetailsQuery, LearningSessionDetailsVm>
 {
     private readonly ILearningSessionsDbContext _dbContext;
     private readonly IMapper _mapper;
-    public LearningSessionDetailsQueryHandler(ILearningSessionsDbContext dbContext, IMapper mapper)
+    public GetLearningSessionDetailsQueryHandler(ILearningSessionsDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;

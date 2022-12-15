@@ -10,8 +10,9 @@ public class LearningSession
     public Guid Id { get; set; }
     public Guid TraineeId { get; set; }
     public string TraineeName { get; set; }
-    public Dictionary<string, bool> SkillsLearned { get; set; }
     public DateTime CreationDate { get; set; }
     public DateTime? EditDate { get; set; }
     public DateTime? FinishingDate { get; set; }
+    //public virtual ICollection<Skill> SkillsToLearn { get; set; }
+    public virtual ICollection<Skill> SkillsLearned { get; set; }
 }

@@ -9,11 +9,11 @@ using TraineeHelper.Application.Common.Exceptions;
 using TraineeHelper.Domain;
 
 namespace TraineeHelper.Application.LearningSessions.Commands.DeleteLearnignSession;
-public class DeleteLearningSessionHandler
+public class DeleteLearningSessionCommandHandler
     : IRequestHandler<DeleteLearningSessionCommand>
 {
     private readonly ILearningSessionsDbContext _dbContext;
-    public DeleteLearningSessionHandler(ILearningSessionsDbContext dbContext)
+    public DeleteLearningSessionCommandHandler(ILearningSessionsDbContext dbContext)
     {
         _dbContext = dbContext;
     }
