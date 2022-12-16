@@ -12,7 +12,7 @@ public class LearningSessionDetailsVm : IMapWith<LearningSession>
 {
     public Guid Id { get; set; }
     public string TraineeName { get; set; }
-    public Dictionary<string, bool> SkillsLearned { get; set; }
+    public List<Skill> SkillsLearned { get; set; }
     public DateTime CreationDate { get; set; }
     public DateTime? EditDate { get; set; }
     public DateTime? FinishingDate { get; set; }

@@ -7,6 +7,9 @@ namespace TraineeHelper.Persistence;
 public class LearningSessionsDbContext : DbContext, ILearningSessionsDbContext
 {
     public DbSet<LearningSession> LearningSessions { get; set; }
+    public DbSet<Trainee> Trainees { get; set; }
+    public DbSet<ApprovedSkill> ApprovedSkills { get; set; }
+    public DbSet<Skill> Skills { get; set; }
     public LearningSessionsDbContext(DbContextOptions<LearningSessionsDbContext> options)
         : base(options) { }
     protected override void OnModelCreating(ModelBuilder builder)

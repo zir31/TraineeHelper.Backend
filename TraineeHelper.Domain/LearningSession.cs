@@ -14,5 +14,5 @@ public class LearningSession
     public DateTime? EditDate { get; set; }
     public DateTime? FinishingDate { get; set; }
     //public virtual ICollection<Skill> SkillsToLearn { get; set; }
-    public virtual ICollection<Skill> SkillsLearned { get; set; }
+    public virtual IEnumerable<Skill> SkillsLearned { get; set; }
 }

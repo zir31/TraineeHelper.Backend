@@ -9,6 +9,6 @@ public class LearningSessionConfiguration : IEntityTypeConfiguration<LearningSes
     {
         builder.HasKey(ls => ls.Id);
         builder.HasIndex(ls => ls.Id).IsUnique();
-        builder.Property(ls => ls.SkillsLearned).HasMaxLength(250);
+        //builder.Property(ls => ls.SkillsLearned).HasMaxLength(250);
     }
 }

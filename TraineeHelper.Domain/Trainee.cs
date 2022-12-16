@@ -6,6 +6,7 @@ namespace TraineeHelper.Domain
     {
         public Guid Id { get; set; }
         public string FullName { get; set; }
-        public virtual ICollection<ApprovedSkill> ApprovedSkills { get; set; }
+        public IEnumerable<ApprovedSkill> ApprovedSkills { get; set; }
+        public IEnumerable<LearningSession> LearningSessions { get; set; }
     }
 }

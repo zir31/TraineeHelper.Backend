@@ -22,6 +22,7 @@ public class CreateLearningSessionCommandHandler
         {
             Id = Guid.NewGuid(),
             TraineeId = command.TraineeId,
+            TraineeName= command.TraineeName,
             //SkillsToLearn = command.SkillsToLearn,
             SkillsLearned = command.SkillsLearned,
             CreationDate = DateTime.Now,

@@ -20,6 +20,7 @@ public class LearningSessionsContextFactory
     {
         var options = new DbContextOptionsBuilder<LearningSessionsDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .EnableSensitiveDataLogging()
             .Options;
         var context = new LearningSessionsDbContext(options);
         context.Database.EnsureCreated();
@@ -39,7 +40,7 @@ public class LearningSessionsContextFactory
                 //},
                 SkillsLearned = new List<Skill>()
                 {
-                    new Skill(){Id = 3, Name="Domain Driven Design"}
+                    new Skill(){Id = 1, Name="Domain Driven Design"}
                 },
                 EditDate = null,
                 Id = Guid.Parse("{B9B78344-7185-4328-AAE2-16FA69F34CB4}"),
@@ -61,7 +62,7 @@ public class LearningSessionsContextFactory
                 //},
                 SkillsLearned = new List<Skill>()
                 {
-                    new Skill(){Id = 3, Name="Domain Driven Design"}
+                    new Skill(){Id = 2, Name="Domain Driven Design"}
                 },
                 EditDate = null,
                 Id = Guid.Parse("{CA3BB9F3-E621-41C1-9140-AB823E0F6577}"),
@@ -105,7 +106,7 @@ public class LearningSessionsContextFactory
                 //},
                 SkillsLearned = new List<Skill>()
                 {
-                    new Skill(){Id = 3, Name="Domain Driven Design"}
+                    new Skill(){Id = 4, Name="Domain Driven Design"}
                 },
                 EditDate = null,
                 Id = LearningSessionIdForUpdate,

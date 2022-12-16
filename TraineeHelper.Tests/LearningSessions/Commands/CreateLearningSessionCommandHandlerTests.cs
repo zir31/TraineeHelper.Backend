@@ -15,8 +15,7 @@ public class CreateLearningSessionCommandHandlerTests : TestCommandBase
         //Arrange
         var handler = new CreateLearningSessionCommandHandler(_context);
         var traineeName = "trainee name";
-        //var skillsLearned = new Dictionary<string, bool>() { { "skill", false } };
-        var skillsLearned = new List<Skill>() { new Skill { Id = 1, Name = "Skill name" } };
+        var skillsLearned = new List<Skill>() { new Skill { Id = 0, Name = "Skill name" } };
 
         // Act
         var sessionId = await handler.Handle(
@@ -31,6 +30,6 @@ public class CreateLearningSessionCommandHandlerTests : TestCommandBase
         // Assert
         Assert.NotNull(
             await _context.LearningSessions.SingleOrDefaultAsync(ls =>
-                ls.Id == sessionId && ls.TraineeName == traineeName && ls.SkillsLearned == skillsLearned));
+                ls.Id == sessionId && ls.TraineeName == traineeName));
     }
 }

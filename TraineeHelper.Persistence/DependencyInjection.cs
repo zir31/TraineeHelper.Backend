@@ -18,6 +18,7 @@ public static class DependencyInjection
         services.AddDbContext<LearningSessionsDbContext>(options =>
         {
             options.UseSqlite(connectionString);
+            options.EnableSensitiveDataLogging(true);
         });
         services.AddScoped<ILearningSessionsDbContext>(provider =>
             provider.GetService<LearningSessionsDbContext>());

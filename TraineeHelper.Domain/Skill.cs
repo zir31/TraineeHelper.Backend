@@ -10,5 +10,5 @@ public class Skill
     public int Id { get; set; }
     public string Name { get; set; }
 
-    public virtual ICollection<ApprovedSkill> ApprovedSkills { get; set; }
+    public virtual IEnumerable<ApprovedSkill> ApprovedSkills { get; set; }
 }
