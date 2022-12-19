@@ -23,13 +23,11 @@ public class LearningSessionDetailsVm : IMapWith<LearningSession>
             .ForMember(lsVm => lsVm.Id,
             opt => opt.MapFrom(ls => ls.Id))
             .ForMember(lsVm => lsVm.TraineeName,
-            opt => opt.MapFrom(ls => ls.TraineeName))
+            opt => opt.MapFrom(ls => ls.Trainee.FullName))
             .ForMember(lsVm => lsVm.SkillsLearned,
             opt => opt.MapFrom(ls => ls.SkillsLearned))
             .ForMember(lsVm => lsVm.CreationDate,
             opt => opt.MapFrom(ls => ls.CreationDate))
-            .ForMember(lsVm => lsVm.EditDate,
-            opt => opt.MapFrom(ls => ls.EditDate))
             .ForMember(lsVm => lsVm.FinishingDate,
             opt => opt.MapFrom(ls => ls.FinishingDate));
     }

@@ -32,7 +32,7 @@ public class GetLearningSessionListQueryHandlerTests
         var result = await handler.Handle(
             new GetLearningSessionsListQuery
             {
-                TraineeId = LearningSessionsContextFactory.UserBId
+                TraineeId = LearningSessionsContextFactory.Trainee2.Id
             },
             CancellationToken.None);
 

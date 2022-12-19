@@ -15,7 +15,7 @@ public class CreateLearningSessionDTO : IMapWith<CreateLearningSessionCommand>
     public void Mapping(Profile profile)
     {
         profile.CreateMap<CreateLearningSessionDTO, CreateLearningSessionCommand>()
-            .ForMember(lsCommand => lsCommand.TraineeName,
+            .ForMember(lsCommand => lsCommand.Trainee.FullName,
             opt => opt.MapFrom(lsDTO => lsDTO.TraineeName))
             .ForMember(lsCommand => lsCommand.SkillsToLearn,
             opt => opt.MapFrom(lsDTO => lsDTO.SkillsToLearn))

@@ -23,7 +23,7 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
         await handler.Handle(new DeleteLearningSessionCommand
         {
             Id = LearningSessionsContextFactory.LearningSessionIdForDelete,
-            TraineeId = LearningSessionsContextFactory.UserAId
+            TraineeId = LearningSessionsContextFactory.Trainee1.Id
         }, CancellationToken.None);
 
         //Assert
@@ -58,8 +58,7 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
         var traineeId = await createHandler.Handle(
             new CreateLearningSessionCommand
             {
-                TraineeName = "Test trainee",
-                TraineeId = LearningSessionsContextFactory.UserAId
+                Trainee = LearningSessionsContextFactory.Trainee2
             }, CancellationToken.None);
 
         // Act

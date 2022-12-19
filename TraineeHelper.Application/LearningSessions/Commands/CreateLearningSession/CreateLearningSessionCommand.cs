@@ -6,9 +6,9 @@ namespace TraineeHelper.Application.LearningSessions.Commands.CreateLearningSess
 {
     public class CreateLearningSessionCommand : IRequest<Guid>
     {
-        public Guid TraineeId { get; set; }
-        public string TraineeName { get; set; }
-        //public Dictionary<string, bool> SkillsLearned { get; set; }
+        public Trainee Trainee { get; set; }
+        //public Guid TraineeId { get; set; }
+        //public string TraineeName { get; set; }
         public List<Skill> SkillsToLearn { get; set; }
         public List<Skill> SkillsLearned { get; set; }
 

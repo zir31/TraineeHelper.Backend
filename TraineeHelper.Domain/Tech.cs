@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TraineeHelper.Domain;
-public class Skill
+public class Tech
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public Tech Technology { get; set; }
-    public virtual IEnumerable<ApprovedSkill> ApprovedSkills { get; set; }
 }

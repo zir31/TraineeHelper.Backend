@@ -39,6 +39,7 @@ builder.Services.AddAuthentication(config =>
         options.Audience = "TraineeHelperWebAPI";
         options.RequireHttpsMetadata = false;
     });
+builder.Services.AddSwaggerGen();
 
     
 
@@ -57,6 +58,8 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 
     }
 }
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseCastomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();

@@ -33,7 +33,7 @@ public class GetLearningSessionDetailsQueryHandlerTests
         var result = await handler.Handle(
             new GetLearningSessionDetailsQuery
             {
-                TraineeId = LearningSessionsContextFactory.UserBId,
+                TraineeId = LearningSessionsContextFactory.Trainee2.Id,
                 Id = Guid.Parse("CA3BB9F3-E621-41C1-9140-AB823E0F6577")
             },
             CancellationToken.None);

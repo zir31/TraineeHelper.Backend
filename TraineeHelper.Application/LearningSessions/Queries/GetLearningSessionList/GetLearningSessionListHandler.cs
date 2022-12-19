@@ -26,7 +26,7 @@ public class GetLearningSessionListQueryHandler : IRequestHandler<GetLearningSes
     {
 
         var lsQuery = await _dbContext.LearningSessions
-            .Where(ls => ls.TraineeId == request.TraineeId)
+            .Where(ls => ls.Trainee.Id == request.TraineeId)
             .ProjectTo<LearningSessionLookupDTO>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 

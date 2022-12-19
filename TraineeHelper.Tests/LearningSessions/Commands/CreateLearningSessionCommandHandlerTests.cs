@@ -21,15 +21,14 @@ public class CreateLearningSessionCommandHandlerTests : TestCommandBase
         var sessionId = await handler.Handle(
             new CreateLearningSessionCommand
             {
-                TraineeName = traineeName,
+                Trainee = LearningSessionsContextFactory.Trainee1,
                 SkillsLearned = skillsLearned,
-                TraineeId = LearningSessionsContextFactory.UserAId
             },
             CancellationToken.None) ;
 
         // Assert
         Assert.NotNull(
-            await _context.LearningSessions.SingleOrDefaultAsync(ls =>
-                ls.Id == sessionId && ls.TraineeName == traineeName));
+            await _context.LearningSessions.AsNoTracking().SingleOrDefaultAsync(ls =>
+                ls.Id == sessionId && ls.Trainee.FullName == LearningSessionsContextFactory.Trainee1.FullName));
     }
 }

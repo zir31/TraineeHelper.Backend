@@ -22,14 +22,14 @@ public class UpdateLearningSessionCommandHandlerTests : TestCommandBase
             await handler.Handle(new UpdateLearningSessionCommand
             {
                 Id = LearningSessionsContextFactory.LearningSessionIdForUpdate,
-                TraineeId = LearningSessionsContextFactory.UserBId,
+                TraineeId = LearningSessionsContextFactory.Trainee2.Id,
                 TraineeName = updatedTraineeName
             }, CancellationToken.None);
 
             // Assert
             Assert.NotNull(await _context.LearningSessions.SingleOrDefaultAsync(ls =>
                 ls.Id == LearningSessionsContextFactory.LearningSessionIdForUpdate &&
-                ls.TraineeName == updatedTraineeName));
+                ls.Trainee.FullName == updatedTraineeName));
         }
 
         [Fact]

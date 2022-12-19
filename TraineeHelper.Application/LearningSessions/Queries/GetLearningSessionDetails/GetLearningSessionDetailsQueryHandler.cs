@@ -29,7 +29,7 @@ public class GetLearningSessionDetailsQueryHandler
             .FirstOrDefaultAsync(ls => 
             ls.Id == request.Id, cancellationToken);
 
-        if (entity == null || entity.TraineeId != request.TraineeId) 
+        if (entity == null || entity.Trainee.Id != request.TraineeId) 
             throw new NotFoundException(nameof(LearningSession), request.Id);
 
         return _mapper.Map<LearningSessionDetailsVm>(entity);

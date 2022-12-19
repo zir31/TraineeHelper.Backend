@@ -18,13 +18,13 @@ public class UpdateLearnignSessonCommandHandler
             await _dbContext.LearningSessions.FirstOrDefaultAsync(ls => 
             ls.Id == request.Id, cancellationToken);
 
-        if (entity == null || entity.TraineeId != request.TraineeId)
+        if (entity == null || entity.Trainee.Id != request.TraineeId)
             throw new NotFoundException(nameof(LearningSession), request.Id);
 
-        entity.TraineeName = request.TraineeName;
+        entity.Trainee.FullName = request.TraineeName;
         //entity.SkillsToLearn = request.SkillsToLearn;
         entity.SkillsLearned = request.SkillsLearned;
-        entity.EditDate = DateTime.Now;
+        //entity.EditDate = DateTime.Now;
 
         await _dbContext.SaveChangesAsync(cancellationToken);
 

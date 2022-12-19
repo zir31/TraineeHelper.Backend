@@ -48,7 +48,7 @@ public class LearningSessionController : BaseController
     public async Task<ActionResult<Guid>> Create([FromBody] CreateLearningSessionDTO createLSDTO)
     {
         var command = _mapper.Map<CreateLearningSessionCommand>(createLSDTO);
-        command.TraineeId = TraineeId;
+        command.Trainee.Id = TraineeId;
         var lsId = await Mediator.Send(command);
         return Ok(lsId);
     }

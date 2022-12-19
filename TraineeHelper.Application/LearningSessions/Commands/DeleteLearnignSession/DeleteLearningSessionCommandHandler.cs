@@ -24,7 +24,7 @@ public class DeleteLearningSessionCommandHandler
         var entity = await _dbContext.LearningSessions
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
-        if (entity == null || entity.TraineeId != request.TraineeId)
+        if (entity == null || entity.Trainee.Id != request.TraineeId)
             throw new NotFoundException(nameof(LearningSession), request.Id);
 
         _dbContext.LearningSessions.Remove(entity);
