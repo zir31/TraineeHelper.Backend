@@ -27,7 +27,7 @@ public class CreateLearningSessionCommandHandler
             //TraineeName= command.TraineeName,
             //SkillsToLearn = command.SkillsToLearn,
             SkillsLearned = command.SkillsLearned,
-            CreationDate = DateTime.Now,
+            CreationDate = DateTime.Today,
             FinishingDate = null
         };
         await _dbContext.LearningSessions.AddAsync(learningSession, cancellationToken);

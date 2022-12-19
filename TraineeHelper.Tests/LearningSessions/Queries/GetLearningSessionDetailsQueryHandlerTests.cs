@@ -8,6 +8,7 @@ using TraineeHelper.Persistence;
 using TraineeHelper.Tests.Common;
 using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
 using Shouldly;
+using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
 
 namespace TraineeHelper.Tests.LearningSessions.Queries;
 
@@ -27,14 +28,20 @@ public class GetLearningSessionDetailsQueryHandlerTests
     public async Task GetLearningSessionDetailsQueryHandler_Success()
     {
         // Arrange
-        var handler = new GetLearningSessionDetailsQueryHandler(Context, Mapper);
+        var createHandler = new CreateLearningSessionCommandHandler(Context);
+        var getHandler = new GetLearningSessionDetailsQueryHandler(Context, Mapper);
 
         // Act
-        var result = await handler.Handle(
+        var createHandlerId = await createHandler.Handle(new CreateLearningSessionCommand
+        {
+            Trainee = LearningSessionsContextFactory.Trainee2
+        }, CancellationToken.None);
+
+        var result = await getHandler.Handle(
             new GetLearningSessionDetailsQuery
             {
                 TraineeId = LearningSessionsContextFactory.Trainee2.Id,
-                Id = Guid.Parse("CA3BB9F3-E621-41C1-9140-AB823E0F6577")
+                Id = createHandlerId
             },
             CancellationToken.None);
 

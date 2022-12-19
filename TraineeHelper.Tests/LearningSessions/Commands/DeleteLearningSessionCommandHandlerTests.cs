@@ -18,17 +18,22 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
     {
         //Arrange
         var handler = new DeleteLearningSessionCommandHandler(_context);
+        var createHandler = new CreateLearningSessionCommandHandler(_context);
 
         //Act
+        var createHandlerId = await createHandler.Handle(new CreateLearningSessionCommand
+        {
+            Trainee = LearningSessionsContextFactory.Trainee1
+        }, CancellationToken.None);
         await handler.Handle(new DeleteLearningSessionCommand
         {
-            Id = LearningSessionsContextFactory.LearningSessionIdForDelete,
+            Id = createHandlerId,
             TraineeId = LearningSessionsContextFactory.Trainee1.Id
         }, CancellationToken.None);
 
         //Assert
         Assert.Null(_context.LearningSessions.SingleOrDefault(ls =>
-        ls.Id == LearningSessionsContextFactory.LearningSessionIdForDelete));
+        ls.Id == createHandlerId));
     }
 
     [Fact]

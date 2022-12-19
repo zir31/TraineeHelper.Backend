@@ -1,39 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TraineeHelper.Application.Common.Exceptions;
+using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
 using TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
 using TraineeHelper.Tests.Common;
 
 namespace TraineeHelper.Tests.LearningSessions.Commands;
 public class UpdateLearningSessionCommandHandlerTests : TestCommandBase
 {
-        [Fact]
-        public async Task UpdateLearningSessionCommandHandler_Success()
+    [Fact]
+    public async Task UpdateLearningSessionCommandHandler_Success()
         {
             // Arrange
-            var handler = new UpdateLearnignSessonCommandHandler(_context);
+            var createHandler = new CreateLearningSessionCommandHandler(_context);
+            var updateHandler = new UpdateLearnignSessonCommandHandler(_context);
             var updatedTraineeName = "Cool Trainee";
 
-            // Act
-            await handler.Handle(new UpdateLearningSessionCommand
+        // Act
+            var createHandlerId = await createHandler.Handle(new CreateLearningSessionCommand
             {
-                Id = LearningSessionsContextFactory.LearningSessionIdForUpdate,
-                TraineeId = LearningSessionsContextFactory.Trainee2.Id,
+                Trainee = LearningSessionsContextFactory.Trainee1
+            }, CancellationToken.None);
+            await updateHandler.Handle(new UpdateLearningSessionCommand
+            {
+                Id = createHandlerId,
+                TraineeId = LearningSessionsContextFactory.Trainee1.Id,
                 TraineeName = updatedTraineeName
             }, CancellationToken.None);
 
             // Assert
             Assert.NotNull(await _context.LearningSessions.SingleOrDefaultAsync(ls =>
-                ls.Id == LearningSessionsContextFactory.LearningSessionIdForUpdate &&
+                ls.Id == createHandlerId &&
                 ls.Trainee.FullName == updatedTraineeName));
         }
 
-        [Fact]
-        public async Task UpdateLearningSessionCommandHandler_FailOnWrongId()
+    [Fact]
+    public async Task UpdateLearningSessionCommandHandler_FailOnWrongId()
         {
             // Arrange
             var handler = new UpdateLearnignSessonCommandHandler(_context);
@@ -50,8 +51,8 @@ public class UpdateLearningSessionCommandHandlerTests : TestCommandBase
                     CancellationToken.None));
         }
 
-        [Fact]
-        public async Task UpdateLearningSessionCommandHandler_FailOnWrongUserId()
+    [Fact]
+    public async Task UpdateLearningSessionCommandHandler_FailOnWrongUserId()
         {
             // Arrange
             var handler = new UpdateLearnignSessonCommandHandler(_context);
