@@ -9,6 +9,7 @@ using TraineeHelper.Tests.Common;
 using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
 using Shouldly;
 using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
+using TraineeHelper.Domain;
 
 namespace TraineeHelper.Tests.LearningSessions.Queries;
 
@@ -30,24 +31,25 @@ public class GetLearningSessionDetailsQueryHandlerTests
         // Arrange
         var createHandler = new CreateLearningSessionCommandHandler(Context);
         var getHandler = new GetLearningSessionDetailsQueryHandler(Context, Mapper);
+        var trainee = new Trainee("Daniel", null);
 
         // Act
         var createHandlerId = await createHandler.Handle(new CreateLearningSessionCommand
         {
-            Trainee = LearningSessionsContextFactory.Trainee2
+            Trainee = trainee
         }, CancellationToken.None);
 
         var result = await getHandler.Handle(
             new GetLearningSessionDetailsQuery
             {
-                TraineeId = LearningSessionsContextFactory.Trainee2.Id,
+                TraineeId = trainee.Id,
                 Id = createHandlerId
             },
             CancellationToken.None);
 
         // Assert
         result.ShouldBeOfType<LearningSessionDetailsVm>();
-        result.TraineeName.ShouldBe("Boris");
+        result.TraineeName.ShouldBe("Daniel");
         result.CreationDate.ShouldBe(DateTime.Today);
     }
 }

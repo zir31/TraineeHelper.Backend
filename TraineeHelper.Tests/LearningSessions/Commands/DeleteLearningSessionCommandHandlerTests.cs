@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TraineeHelper.Application.Common.Exceptions;
 using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
 using TraineeHelper.Application.LearningSessions.Commands.DeleteLearnignSession;
+using TraineeHelper.Domain;
 using TraineeHelper.Tests.Common;
 
 namespace TraineeHelper.Tests.LearningSessions.Commands;
@@ -18,22 +19,15 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
     {
         //Arrange
         var handler = new DeleteLearningSessionCommandHandler(_context);
-        var createHandler = new CreateLearningSessionCommandHandler(_context);
-
-        //Act
-        var createHandlerId = await createHandler.Handle(new CreateLearningSessionCommand
-        {
-            Trainee = LearningSessionsContextFactory.Trainee1
-        }, CancellationToken.None);
         await handler.Handle(new DeleteLearningSessionCommand
         {
-            Id = createHandlerId,
-            TraineeId = LearningSessionsContextFactory.Trainee1.Id
+            Id = LearningSessionsContextFactory.LearningSessionIdForDelete,
+            TraineeId = LearningSessionsContextFactory.UserAId
         }, CancellationToken.None);
 
         //Assert
-        Assert.Null(_context.LearningSessions.SingleOrDefault(ls =>
-        ls.Id == createHandlerId));
+        Assert.Null(_context.LearningSessions.FirstOrDefault(ls =>
+        ls.Id == LearningSessionsContextFactory.LearningSessionIdForDelete));
     }
 
     [Fact]
@@ -60,10 +54,11 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
         // Arrange
         var deleteHandler = new DeleteLearningSessionCommandHandler(_context);
         var createHandler = new CreateLearningSessionCommandHandler(_context);
-        var traineeId = await createHandler.Handle(
+        var traineeId = Guid.NewGuid();
+        var lsId = await createHandler.Handle(
             new CreateLearningSessionCommand
             {
-                Trainee = LearningSessionsContextFactory.Trainee2
+                Trainee = new Trainee { Id = traineeId, FullName = "Cicero"}
             }, CancellationToken.None);
 
         // Act
@@ -72,7 +67,7 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
             await deleteHandler.Handle(
                 new DeleteLearningSessionCommand
                 {
-                    Id = traineeId,
+                    Id = lsId,
                     TraineeId = LearningSessionsContextFactory.UserBId
                 }, CancellationToken.None));
     }

@@ -21,7 +21,7 @@ public class CreateLearningSessionCommandHandlerTests : TestCommandBase
         var sessionId = await handler.Handle(
             new CreateLearningSessionCommand
             {
-                Trainee = LearningSessionsContextFactory.Trainee1,
+                Trainee = new Trainee("Alex",null),
                 SkillsLearned = skillsLearned,
             },
             CancellationToken.None) ;
@@ -29,6 +29,6 @@ public class CreateLearningSessionCommandHandlerTests : TestCommandBase
         // Assert
         Assert.NotNull(
             await _context.LearningSessions.AsNoTracking().SingleOrDefaultAsync(ls =>
-                ls.Id == sessionId && ls.Trainee.FullName == LearningSessionsContextFactory.Trainee1.FullName));
+                ls.Id == sessionId));
     }
 }

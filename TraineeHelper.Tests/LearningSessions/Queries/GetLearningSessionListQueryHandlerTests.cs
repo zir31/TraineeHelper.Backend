@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Shouldly;
 using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionList;
+using TraineeHelper.Domain;
 using TraineeHelper.Persistence;
 using TraineeHelper.Tests.Common;
 
@@ -32,7 +33,7 @@ public class GetLearningSessionListQueryHandlerTests
         var result = await handler.Handle(
             new GetLearningSessionsListQuery
             {
-                TraineeId = LearningSessionsContextFactory.Trainee2.Id
+                TraineeId = LearningSessionsContextFactory.UserBId
             },
             CancellationToken.None);
 

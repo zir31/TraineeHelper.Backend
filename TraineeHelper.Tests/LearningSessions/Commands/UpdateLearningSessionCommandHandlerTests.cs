@@ -2,6 +2,7 @@
 using TraineeHelper.Application.Common.Exceptions;
 using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
 using TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
+using TraineeHelper.Domain;
 using TraineeHelper.Tests.Common;
 
 namespace TraineeHelper.Tests.LearningSessions.Commands;
@@ -11,25 +12,25 @@ public class UpdateLearningSessionCommandHandlerTests : TestCommandBase
     public async Task UpdateLearningSessionCommandHandler_Success()
         {
             // Arrange
-            var createHandler = new CreateLearningSessionCommandHandler(_context);
+            //var createHandler = new CreateLearningSessionCommandHandler(_context);
             var updateHandler = new UpdateLearnignSessonCommandHandler(_context);
             var updatedTraineeName = "Cool Trainee";
 
         // Act
-            var createHandlerId = await createHandler.Handle(new CreateLearningSessionCommand
-            {
-                Trainee = LearningSessionsContextFactory.Trainee1
-            }, CancellationToken.None);
+            //var createHandlerId = await createHandler.Handle(new CreateLearningSessionCommand
+            //{ 
+            //    Trainee = new Trainee("Alex", null)
+            //}, CancellationToken.None);
             await updateHandler.Handle(new UpdateLearningSessionCommand
             {
-                Id = createHandlerId,
-                TraineeId = LearningSessionsContextFactory.Trainee1.Id,
+                Id = LearningSessionsContextFactory.LearningSessionIdForUpdate,
+                TraineeId = LearningSessionsContextFactory.UserBId,
                 TraineeName = updatedTraineeName
             }, CancellationToken.None);
 
             // Assert
             Assert.NotNull(await _context.LearningSessions.SingleOrDefaultAsync(ls =>
-                ls.Id == createHandlerId &&
+                ls.Id == LearningSessionsContextFactory.LearningSessionIdForUpdate &&
                 ls.Trainee.FullName == updatedTraineeName));
         }
 
