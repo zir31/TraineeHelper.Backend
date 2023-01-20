@@ -7,6 +7,7 @@ using TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
 using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
 using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionList;
 using TraineeHelper.WebApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace TraineeHelper.WebApi.Controllers;
 
