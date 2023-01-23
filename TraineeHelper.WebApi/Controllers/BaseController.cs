@@ -13,5 +13,6 @@ public abstract class BaseController : ControllerBase
         _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
     internal Guid TraineeId => !User.Identity.IsAuthenticated
         ? Guid.Empty
-        : Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        //: Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        : Guid.Parse(User.FindFirstValue("sub"));
 }

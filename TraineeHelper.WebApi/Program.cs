@@ -12,6 +12,7 @@ using IdentityServer4.AccessTokenValidation;
 using IdentityModel;
 using TraineeHelper.WebApi.Filters;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,21 +43,22 @@ builder.Services.AddCors(options =>
 //    //options.DefaultChallengeScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
 //    //options.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
 //})
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-        options =>
-        {
-            options.LoginPath = new PathString("/auth/login");
-            options.AccessDeniedPath = new PathString("/auth/denied");
-        })
-    .AddIdentityServerAuthentication(options =>
+builder.Services.AddAuthentication("Bearer")
+    //.AddIdentityServerAuthentication("Bearer", options =>
+    //{
+    //    options.ApiName = "traneeHelper_api_swagger";
+    //    options.Authority = "https://localhost:7177";
+    //    options.RequireHttpsMetadata = false;
+    //})
+    .AddJwtBearer("Bearer", config =>
     {
-        options.ApiName = "trainee_api";
-        options.Authority = "https://localhost:7177";
-        options.RequireHttpsMetadata = false;
+        config.Authority = "https://localhost:7177";
+        config.Audience = "traneeHelper_api_swagger";
+        config.RequireHttpsMetadata = false;
+        config.MapInboundClaims = false;
     });
 
-builder.Services.AddAuthorization();
+//builder.Services.AddAuthorization();
 //.AddJwtBearer("Bearer", options =>
 //{
 //    options.Authority = "https://localhost:44352";
@@ -66,27 +68,28 @@ builder.Services.AddAuthorization();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Protected TraineeHelper Web API", Version = "v1" });
-    //options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-    //{
-    //    Type = SecuritySchemeType.OAuth2,
-    //    Flows = new OpenApiOAuthFlows
-    //    {
-    //        AuthorizationCode = new OpenApiOAuthFlow
-    //        {
-    //            AuthorizationUrl = new Uri("https://localhost:7177/connect/authorize"),
-    //            TokenUrl = new Uri("https://localhost:7177/connect/token"),
-    //            Scopes = new Dictionary<string, string>
-    //        {
-    //            {"trainee_api", "Demo API - full access"}
-    //        }
-    //        }
-    //    }
-    //});
-    options.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
-        Type = SecuritySchemeType.Http,
-        Scheme = "basic"
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows
+        {
+            AuthorizationCode = new OpenApiOAuthFlow
+            {
+                AuthorizationUrl = new Uri("https://localhost:7177/connect/authorize"),
+                TokenUrl = new Uri("https://localhost:7177/connect/token"),
+                Scopes = new Dictionary<string, string>
+            {
+                {"traineeAPI", "Demo API - full access"}
+            }
+            }
+        }
     });
+    //options.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+    //{
+    //    Type = SecuritySchemeType.Http,
+    //    Scheme = "basic"
+    //});
     //options.AddSecurityRequirement(new OpenApiSecurityRequirement
     //{
     //    {
@@ -124,21 +127,26 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 
     }
 }
+
+app.UseCastomExceptionHandler();
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("AllowAll");
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger UI Demo");
     options.DocumentTitle = "Test Title";
-    options.OAuthClientId("trainee_api");
+    options.OAuthClientId("traneeHelper_api_swagger");
     //options.OAuthClientSecret("client_secret_swagger");
-    //options.OAuthUsePkce();
+    options.OAuthUsePkce();
 });
-app.UseCastomExceptionHandler();
-app.UseRouting();
-app.UseHttpsRedirection();
-app.UseCors("AllowAll");
-app.UseAuthentication();
-app.UseAuthorization();
 
 
 app.UseEndpoints(endpoints =>
