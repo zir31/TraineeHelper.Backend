@@ -9,5 +9,5 @@ namespace TraineeHelper.Application.LearningSessions.Commands.DeleteLearnignSess
 public class DeleteLearningSessionCommand : IRequest
 {
     public Guid TraineeId { get; set; }
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 }

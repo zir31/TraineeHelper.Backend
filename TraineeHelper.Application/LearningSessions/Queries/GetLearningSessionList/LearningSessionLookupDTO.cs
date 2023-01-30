@@ -11,7 +11,7 @@ using TraineeHelper.Domain;
 namespace TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionList;
 public class LearningSessionLookupDTO : IMapWith<LearningSession>
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public DateTime CreationDate { get; set; }
 
     public void Mapping(Profile profile)

@@ -9,5 +9,5 @@ namespace TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionD
 public class GetLearningSessionDetailsQuery : IRequest<LearningSessionDetailsVm>
 {
     public Guid TraineeId { get; set; }
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 }

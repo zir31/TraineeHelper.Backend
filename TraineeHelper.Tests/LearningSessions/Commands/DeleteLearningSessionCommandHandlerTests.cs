@@ -42,7 +42,7 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
         await handler.Handle(
             new DeleteLearningSessionCommand
             {
-                Id = Guid.NewGuid(),
+                Id = 777777,
                 TraineeId = LearningSessionsContextFactory.UserAId
             },
             CancellationToken.None));
@@ -54,11 +54,12 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
         // Arrange
         var deleteHandler = new DeleteLearningSessionCommandHandler(_context);
         var createHandler = new CreateLearningSessionCommandHandler(_context);
-        var traineeId = Guid.NewGuid();
+        var tech = new Technology() { Name = ".NET" };
+        var trainee = new Trainee("Cicero", tech, null);
         var lsId = await createHandler.Handle(
             new CreateLearningSessionCommand
             {
-                Trainee = new Trainee { Id = traineeId, FullName = "Cicero"}
+                Trainee = trainee
             }, CancellationToken.None);
 
         // Act

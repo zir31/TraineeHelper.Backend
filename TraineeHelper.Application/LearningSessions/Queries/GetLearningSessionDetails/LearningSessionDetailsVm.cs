@@ -12,7 +12,7 @@ public class LearningSessionDetailsVm : IMapWith<LearningSession>
 {
     public Guid Id { get; set; }
     public string TraineeName { get; set; }
-    public List<Skill> SkillsLearned { get; set; }
+    public List<Skill> SkillsToLearn { get; set; }
     public DateTime CreationDate { get; set; }
     public DateTime? EditDate { get; set; }
     public DateTime? FinishingDate { get; set; }
@@ -24,8 +24,8 @@ public class LearningSessionDetailsVm : IMapWith<LearningSession>
             opt => opt.MapFrom(ls => ls.Id))
             .ForMember(lsVm => lsVm.TraineeName,
             opt => opt.MapFrom(ls => ls.Trainee.FullName))
-            .ForMember(lsVm => lsVm.SkillsLearned,
-            opt => opt.MapFrom(ls => ls.SkillsLearned))
+            .ForMember(lsVm => lsVm.SkillsToLearn,
+            opt => opt.MapFrom(ls => ls.PersonalSkills))
             .ForMember(lsVm => lsVm.CreationDate,
             opt => opt.MapFrom(ls => ls.CreationDate))
             .ForMember(lsVm => lsVm.FinishingDate,

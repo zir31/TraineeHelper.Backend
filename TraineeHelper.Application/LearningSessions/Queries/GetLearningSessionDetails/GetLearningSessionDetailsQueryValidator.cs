@@ -11,7 +11,7 @@ public class GetLearningSessionDetailsQueryValidator : AbstractValidator<GetLear
     public GetLearningSessionDetailsQueryValidator()
     {
         RuleFor(getLSDetails =>
-            getLSDetails.Id).NotEqual(Guid.Empty);
+            getLSDetails.Id).NotEqual(null);
         RuleFor(getLSDetails =>
             getLSDetails.TraineeId).NotEqual(Guid.Empty);
     }

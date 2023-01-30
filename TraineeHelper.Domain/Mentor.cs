@@ -9,7 +9,9 @@ public class Mentor
 {
     public Guid Id { get; set; }
     public string FullName { get; set; }
-    public IEnumerable<ApprovedSkill> ApprovedSkills { get; set; }
+    public IEnumerable<PersonalSkill> PersonalSkills { get; set; }
     public IEnumerable<LearningSession> LearningSessions { get; set; }
     public IEnumerable<Trainee> Trainees { get; set; }
+
+
 }

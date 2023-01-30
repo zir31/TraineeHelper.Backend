@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TraineeHelper.Domain;
-public class Tech
+public class Technology
 {
     public int Id { get; set; }
     public string Name { get; set; }

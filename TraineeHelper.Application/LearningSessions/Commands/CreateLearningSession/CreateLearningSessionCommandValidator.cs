@@ -2,7 +2,7 @@
 using FluentValidation;
 
 namespace TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
-public class CreateLearningSessionCommandValidator :AbstractValidator<CreateLearningSessionCommand>
+public class CreateLearningSessionCommandValidator : AbstractValidator<CreateLearningSessionCommand>
 {
     public CreateLearningSessionCommandValidator()
     {

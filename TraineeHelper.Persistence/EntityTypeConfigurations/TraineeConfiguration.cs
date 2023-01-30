@@ -2,15 +2,20 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TraineeHelper.Domain;
 
-namespace TraineeHelper.Persistence.EntityTypeConfigurations
+namespace TraineeHelper.Persistence.EntityTypeConfigurations;
+public class TraineeConfiguration : IEntityTypeConfiguration<Trainee>
 {
-    public class TraineeConfiguration : IEntityTypeConfiguration<Trainee>
+    public void Configure(EntityTypeBuilder<Trainee> builder)
     {
-        public void Configure(EntityTypeBuilder<Trainee> builder)
-        {
-            builder.HasKey(trainee => trainee.Id);
-            builder.HasIndex(trainee => trainee.Id).IsUnique();
-            builder.Property(trainee => trainee.FullName).HasMaxLength(250);
-        }
+        builder.HasMany(trainee => trainee.LearningSessions)
+            .WithOne(ls => ls.Trainee)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(trainee => trainee.ActiveLearningSession)
+            .WithOne()
+            .HasForeignKey<Trainee>(trainee => trainee.ActiveLearningSessionId);
+        //builder.HasKey(ls => ls.Id);
+        //builder.HasIndex(ls => ls.Id).IsUnique();
+        //builder.Property(ls => ls.SkillsLearned).HasMaxLength(250);
     }
 }

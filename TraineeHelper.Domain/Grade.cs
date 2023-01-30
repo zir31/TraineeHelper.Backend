@@ -5,20 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TraineeHelper.Domain;
-public class Skill
+public class Grade
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public Technology Technology { get; set; }
-    public ICollection<PersonalSkill> PersonalSkills { get; set; }
 
-    public Skill(string name, Technology technology)
-    {
-        Name = name;
-        Technology = technology;
-    }
-    private Skill()
-    {
-
-    }
+    public ICollection<RequiredSkill> RequiredSkills { get; set; }
+    public ICollection<Trainee> Trainees { get; set; }
 }

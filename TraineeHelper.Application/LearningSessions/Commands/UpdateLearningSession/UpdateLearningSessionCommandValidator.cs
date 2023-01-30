@@ -9,7 +9,7 @@ public class UpdateLearningSessionCommandValidator : AbstractValidator<UpdateLea
         RuleFor(updateLSCommand =>
             updateLSCommand.TraineeId).NotEqual(Guid.Empty);
         RuleFor(updateLSCommand =>
-            updateLSCommand.Id).NotEqual(Guid.Empty);
+            updateLSCommand.Id).NotEqual(null);
         RuleFor(createLSCommand =>
             createLSCommand.SkillsLearned).NotEmpty();
     }

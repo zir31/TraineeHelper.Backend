@@ -14,8 +14,8 @@ public class LearningSessionsContextFactory
     public static Guid UserAId = Guid.NewGuid();
     public static Guid UserBId = Guid.NewGuid();
 
-    public static Guid LearningSessionIdForUpdate= Guid.NewGuid();
-    public static Guid LearningSessionIdForDelete= Guid.NewGuid();
+    public static int LearningSessionIdForUpdate= 6465;
+    public static int LearningSessionIdForDelete= 7657;
 
     //public static Trainee Trainee1 = new Trainee("Alex", null);
     //public static Trainee Trainee2 = new Trainee("Boris", null);
@@ -56,37 +56,43 @@ public class LearningSessionsContextFactory
             .EnableSensitiveDataLogging()
             .Options;
         var context = new LearningSessionsDbContext(options);
-        var Trainee1 = new Trainee("Alex", null) { Id = UserAId};
-        var Trainee2 = new Trainee("Boris", null) { Id = UserBId};
+        var tech = new Technology() { Name = ".NET" };
+        var Trainee1 = new Trainee("Alex", tech, null) { Id = UserAId};
+        var Trainee2 = new Trainee("Boris", tech, null) { Id = UserBId};
         context.Database.EnsureCreated();
-        //context.Skills.AddRange(SampleSkills);
         //Trainee1.CreateLearningSession(SampleSkills);
+        //context.LearningSessions.AddRange(
+        //new LearningSession(Trainee1, null)
+        //{
+        //    CreationDate = DateTime.Today,
+        //    Id = Guid.NewGuid(),
+        //    Trainee = Trainee1
+        //},
+        //new LearningSession
+        //{
+        //    CreationDate = DateTime.Today,
+        //    Id = Guid.NewGuid(),
+        //    Trainee = Trainee2
+        //},
+        //new LearningSession
+        //{
+        //    CreationDate = DateTime.Today,
+        //    Id = LearningSessionIdForDelete,
+        //    Trainee = Trainee1
+        //},
+        //new LearningSession
+        //{
+        //    CreationDate = DateTime.Today,
+        //    Id = LearningSessionIdForUpdate,
+        //    Trainee = Trainee2
+        //});
         context.LearningSessions.AddRange(
-            new LearningSession
-            {
-                CreationDate = DateTime.Today,
-                //Id = Guid.Parse("{B9B78344-7185-4328-AAE2-16FA69F34CB4}"),
-                Id = Guid.NewGuid(),
-                Trainee = Trainee1
-            },
-            new LearningSession
-            {
-                CreationDate = DateTime.Today,
-                Id = Guid.NewGuid(),
-                Trainee = Trainee2
-            },
-            new LearningSession
-            {
-                CreationDate = DateTime.Today,
-                Id = LearningSessionIdForDelete,
-                Trainee = Trainee1
-            },
-            new LearningSession
-            {
-                CreationDate = DateTime.Today,
-                Id = LearningSessionIdForUpdate,
-                Trainee = Trainee2
-            });
+            new LearningSession(Trainee1, null),
+            new LearningSession(Trainee2, null),
+            new LearningSession(Trainee1, null),
+            new LearningSession(Trainee2, null)
+
+             );
         context.SaveChanges();
         var contextFactoryMock = new Mock<IDbContextFactory<LearningSessionsDbContext>>();
         contextFactoryMock.Setup(factory => factory.CreateDbContext()).Returns(new LearningSessionsDbContext(options));

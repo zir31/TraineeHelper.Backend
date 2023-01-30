@@ -46,7 +46,7 @@ public class UpdateLearningSessionCommandHandlerTests : TestCommandBase
                 await handler.Handle(
                     new UpdateLearningSessionCommand
                     {
-                        Id = Guid.NewGuid(),
+                        Id = 777777777,
                         TraineeId = LearningSessionsContextFactory.UserAId
                     },
                     CancellationToken.None));

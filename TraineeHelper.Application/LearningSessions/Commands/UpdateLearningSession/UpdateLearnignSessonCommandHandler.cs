@@ -23,7 +23,7 @@ public class UpdateLearnignSessonCommandHandler
 
         entity.Trainee.FullName = request.TraineeName;
         //entity.SkillsToLearn = request.SkillsToLearn;
-        entity.SkillsLearned = request.SkillsLearned;
+        //entity.SkillsLearned = request.SkillsLearned;
         //entity.EditDate = DateTime.Now;
 
         await _dbContext.SaveChangesAsync(cancellationToken);

@@ -31,7 +31,8 @@ public class GetLearningSessionDetailsQueryHandlerTests
         // Arrange
         var createHandler = new CreateLearningSessionCommandHandler(Context);
         var getHandler = new GetLearningSessionDetailsQueryHandler(Context, Mapper);
-        var trainee = new Trainee("Daniel", null);
+        var tech = new Technology() { Name = ".NET" };
+        var trainee = new Trainee("Daniel", tech, null);
 
         // Act
         var createHandlerId = await createHandler.Handle(new CreateLearningSessionCommand

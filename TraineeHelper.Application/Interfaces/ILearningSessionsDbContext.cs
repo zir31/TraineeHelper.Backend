@@ -10,5 +10,6 @@ namespace TraineeHelper.Application.Interfaces;
 public interface ILearningSessionsDbContext
 {
     DbSet<LearningSession> LearningSessions { get; set; }
+    DbSet<Skill> Skills { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
