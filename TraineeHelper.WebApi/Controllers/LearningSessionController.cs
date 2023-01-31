@@ -60,7 +60,7 @@ public class LearningSessionController : BaseController
     public async Task<IActionResult> Update([FromBody] UpdateLearningSessionDTO updateLSDTO)
     {
         var command = _mapper.Map<UpdateLearningSessionCommand>(updateLSDTO);
-        command.TraineeId = TraineeId;
+        command.Trainee.Id = TraineeId;
         await Mediator.Send(command);
         return NoContent();
     }

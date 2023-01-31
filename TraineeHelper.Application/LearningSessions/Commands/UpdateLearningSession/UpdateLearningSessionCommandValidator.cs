@@ -7,9 +7,9 @@ public class UpdateLearningSessionCommandValidator : AbstractValidator<UpdateLea
     public UpdateLearningSessionCommandValidator()
     {
         RuleFor(updateLSCommand =>
-            updateLSCommand.TraineeId).NotEqual(Guid.Empty);
-        RuleFor(updateLSCommand =>
-            updateLSCommand.Id).NotEqual(null);
+            updateLSCommand.Trainee.Id).NotEqual(Guid.Empty);
+        //RuleFor(updateLSCommand =>
+        //    updateLSCommand.Id).NotEqual(null);
         RuleFor(createLSCommand =>
             createLSCommand.SkillsLearned).NotEmpty();
     }

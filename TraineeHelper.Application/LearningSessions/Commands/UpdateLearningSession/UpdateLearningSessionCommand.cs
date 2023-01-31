@@ -1,14 +1,13 @@
 ﻿using MediatR;
 using System;
 using TraineeHelper.Domain;
+using TraineeHelper.Domain.Status;
 
 namespace TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
 public class UpdateLearningSessionCommand : IRequest
 {
-    public Guid TraineeId { get; set; }
     public int Id { get; set; }
-    public string TraineeName { get; set; }
-    //public Dictionary<string, bool> SkillsLearned { get; set; }
-    public List<Skill> SkillsToLearn { get; set; }
-    public List<Skill> SkillsLearned { get; set; }
+    public Trainee Trainee { get; set; }
+    public LearningSessionState LearningSessionState { get; set; }
+    public List<PersonalSkill> SkillsLearned{ get; set; }
 }

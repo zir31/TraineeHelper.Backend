@@ -21,30 +21,6 @@ public class MentorController : BaseController
     {
         _mapper = mapper;
     }
-    [HttpGet]
-    [Authorize]
-    public async Task<ActionResult<LearningSessionListVm>> GetAll()
-    {
-        var query = new GetLearningSessionsListQuery()
-        {
-            TraineeId = TraineeId
-        };
-        var vm = await Mediator.Send(query);
-        return Ok(vm);
-    }
-
-    [HttpGet("{id}")]
-    [Authorize]
-    public async Task<ActionResult<LearningSessionDetailsVm>> Get(int id)
-    {
-        var query = new GetLearningSessionDetailsQuery()
-        {
-            TraineeId = TraineeId,
-            Id = id
-        };
-        var vm = await Mediator.Send(query);
-        return Ok(vm);
-    }
 
     [HttpPost]
     [Authorize]

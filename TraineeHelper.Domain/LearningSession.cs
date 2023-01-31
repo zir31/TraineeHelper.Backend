@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraineeHelper.Domain.Status;
 
 namespace TraineeHelper.Domain;
 public class LearningSession
@@ -12,9 +13,11 @@ public class LearningSession
     public DateTime CreationDate { get; private set; }
     public DateTime? FinishingDate { get; private set; }
     public Mentor? Mentor { get; private set; }
-    //public LearningSessionStatus Status { get; set; }
+    public LearningSessionState State { get; set; }
+    public string StateType { get; set; }
     public bool IsActive { get; private set; }
     public ICollection<PersonalSkill> PersonalSkills { get; set; }
+    private LearningSessionState _learningSessionState;
 
     public LearningSession(Trainee trainee, ICollection<PersonalSkill> skillsToLearn)
     {
@@ -27,11 +30,8 @@ public class LearningSession
         Mentor = trainee.Mentor;
         IsActive = true;
         PersonalSkills = skillsToLearn;
-        //PersonalSkills = new List<PersonalSkill>();
-        //foreach(var skill in skillsToLearn)
-        //{
-        //    PersonalSkills.Add(new PersonalSkill(Trainee, skill));
-        //}
+        State = new LearningState();
+        StateType = State.Name;
     }
 
     private LearningSession()

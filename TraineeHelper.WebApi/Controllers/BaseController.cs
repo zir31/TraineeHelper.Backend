@@ -14,5 +14,6 @@ public abstract class BaseController : ControllerBase
     internal Guid TraineeId => !User.Identity.IsAuthenticated
         ? Guid.Empty
         //: Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        //TODO change this placeholder
         : Guid.Parse(User.FindFirstValue("sub"));
 }
