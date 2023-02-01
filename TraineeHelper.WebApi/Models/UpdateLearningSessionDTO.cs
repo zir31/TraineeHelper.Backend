@@ -9,7 +9,7 @@ namespace TraineeHelper.WebApi.Models;
 
 public class UpdateLearningSessionDTO : IMapWith<UpdateLearningSessionCommand>
 {
-    public Trainee Trainee { get; set; }
+    //public Trainee Trainee { get; set; }
     public List<int> SkillsLearned { get; set; }
     public LearningSessionState LearningSessionState { get; set; }
 

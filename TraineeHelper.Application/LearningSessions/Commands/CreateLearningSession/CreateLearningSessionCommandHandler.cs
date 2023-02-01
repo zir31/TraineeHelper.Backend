@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using TraineeHelper.Application.Interfaces;
 using TraineeHelper.Domain;
 
 namespace TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
+//TODO response from int to generic
 public class CreateLearningSessionCommandHandler
     : IRequestHandler<CreateLearningSessionCommand, int>
 {
+    //TODO repo instead of dbcontext
     private readonly ILearningSessionsDbContext _dbContext;
     public CreateLearningSessionCommandHandler(ILearningSessionsDbContext dbContext) =>
         _dbContext = dbContext;
@@ -20,7 +17,7 @@ public class CreateLearningSessionCommandHandler
     {
         var personalSkills = new List<PersonalSkill>();
         foreach (var skill in command.SkillsToLearn)
-        {
+        {//TODO 
             personalSkills.Add(new PersonalSkill(command.Trainee, _dbContext.Skills.FindAsync(skill.SkillId).Result));
         }
         var learningSession = new LearningSession(command.Trainee, personalSkills);

@@ -8,8 +8,7 @@ public class TraineeConfiguration : IEntityTypeConfiguration<Trainee>
     public void Configure(EntityTypeBuilder<Trainee> builder)
     {
         builder.HasMany(trainee => trainee.LearningSessions)
-            .WithOne(ls => ls.Trainee)
-            .OnDelete(DeleteBehavior.Cascade);
+            .WithOne(ls => ls.Trainee);
 
         builder.HasOne(trainee => trainee.ActiveLearningSession)
             .WithOne()

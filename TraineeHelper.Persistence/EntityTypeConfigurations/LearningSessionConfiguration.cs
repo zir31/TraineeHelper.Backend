@@ -7,6 +7,7 @@ public class LearningSessionConfiguration : IEntityTypeConfiguration<LearningSes
 {
     public void Configure(EntityTypeBuilder<LearningSession> builder)
     {
+        //TODO add all 
         builder.HasKey(ls => ls.Id);
         builder.HasIndex(ls => ls.Id).IsUnique();
         builder.Ignore(ls => ls.State);

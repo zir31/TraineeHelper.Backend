@@ -4,6 +4,8 @@ using TraineeHelper.Domain;
 
 namespace TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession
 {
+    //TODO Change to records
+    //get private set
     public class CreateLearningSessionCommand : IRequest<int>
     {
         public Trainee Trainee { get; set; }

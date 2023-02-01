@@ -6,12 +6,17 @@ namespace TraineeHelper.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public abstract class BaseController : ControllerBase
+public class BaseController : ControllerBase
 {
-    private IMediator _mediator;
-    protected IMediator Mediator => 
-        _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
-    internal Guid TraineeId => !User.Identity.IsAuthenticated
+    public BaseController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+    //TODO Change to concrete 
+    protected IMediator _mediator;
+
+    // TODO validate
+    internal Guid TraineeId => !User.Identity??= 
         ? Guid.Empty
         //: Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
         //TODO change this placeholder

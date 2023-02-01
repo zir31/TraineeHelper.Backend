@@ -10,15 +10,16 @@ using TraineeHelper.WebApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using TraineeHelper.Application.LearningSessions.Commands.CreateSkill;
 using TraineeHelper.Domain;
+using MediatR;
 
 namespace TraineeHelper.WebApi.Controllers;
 
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class TraineeController : BaseController
 {
     private readonly IMapper _mapper;
 
-    public TraineeController(IMapper mapper)
+    public TraineeController(IMapper mapper) : base()
     {
         _mapper = mapper;
     }
@@ -34,14 +35,14 @@ public class TraineeController : BaseController
         var lsId = await Mediator.Send(command);
         return Ok(lsId);
     }
-
+    //TODO summary
     [HttpPut]
     [Authorize]
     public async Task<ActionResult> UpdateLearningSession([FromBody] UpdateLearningSessionDTO updateLearningSessionDTO)
     {
         //var sampleMentor = new Mentor() { Id = Guid.NewGuid(), FullName = "Alex" };
         //var createLearningSessionDTO = new CreateLearningSessionDTO() { SkillsToLearn = personalSkills };
-        var command = _mapper.Map<CreateLearningSessionCommand>(updateLearningSessionDTO);
+        var command = _mapper.Map<UpdateLearningSessionCommand>(updateLearningSessionDTO);
        //command.Trainee = new Trainee("Bob", new Technology() { Name = "Default Tech" }, null);
        // command.Trainee.Id = TraineeId;
 

@@ -21,11 +21,7 @@ public class UpdateLearnignSessonCommandHandler
         if (entity == null || entity.Trainee.Id != request.Trainee.Id)
             throw new NotFoundException(nameof(LearningSession), request.Id);
 
-        //entity.Trainee.FullName = request.TraineeName;
-        //entity.SkillsToLearn = request.SkillsToLearn;
-        //entity.SkillsLearned = request.SkillsLearned;
-        //entity.EditDate = DateTime.Now;
-
+        //TODO update entity
         await _dbContext.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
