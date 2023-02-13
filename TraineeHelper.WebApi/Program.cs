@@ -1,6 +1,5 @@
 using System.Reflection;
 using TraineeHelper.Application;
-using TraineeHelper.Application.Common.Mappings;
 using TraineeHelper.Application.Interfaces;
 using TraineeHelper.Persistence;
 using Microsoft.Extensions.Configuration;
@@ -13,16 +12,21 @@ using IdentityModel;
 using TraineeHelper.WebApi.Filters;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.IdentityModel.Tokens.Jwt;
+using TraineeHelper.WebApi.Extensions;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(config =>
 {
-    config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
-    config.AddProfile(new AssemblyMappingProfile(typeof(ILearningSessionsDbContext).Assembly));
+    //config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+    //config.AddProfile(new AssemblyMappingProfile(typeof(ILearningSessionsDbContext).Assembly));
 });
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddRepositories();
+builder.Services.AddAutomapperProfiles();
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
@@ -33,23 +37,13 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin();
     });
 });
-//builder.Services.AddAuthentication(options =>
-//{
-//    //options.DefaultAuthenticateScheme =
-//    //    JwtBearerDefaults.AuthenticationScheme;
-//    //options.DefaultChallengeScheme =
-//    //    JwtBearerDefaults.AuthenticationScheme;
-//    //options.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-//    //options.DefaultChallengeScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-//    //options.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-//})
-builder.Services.AddAuthentication("Bearer")
-    //.AddIdentityServerAuthentication("Bearer", options =>
-    //{
-    //    options.ApiName = "traneeHelper_api_swagger";
-    //    options.Authority = "https://localhost:7177";
-    //    options.RequireHttpsMetadata = false;
-    //})
+
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme =
+        JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
     .AddJwtBearer("Bearer", config =>
     {
         config.Authority = "https://localhost:7177";
@@ -58,13 +52,6 @@ builder.Services.AddAuthentication("Bearer")
         config.MapInboundClaims = false;
     });
 
-//builder.Services.AddAuthorization();
-//.AddJwtBearer("Bearer", options =>
-//{
-//    options.Authority = "https://localhost:44352";
-//    options.Audience = "TraineeHelperWebAPI";
-//    options.RequireHttpsMetadata = false;
-//});
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Protected TraineeHelper Web API", Version = "v1" });
@@ -85,32 +72,12 @@ builder.Services.AddSwaggerGen(options =>
             }
         }
     });
-    //options.AddSecurityDefinition("basic", new OpenApiSecurityScheme
-    //{
-    //    Type = SecuritySchemeType.Http,
-    //    Scheme = "basic"
-    //});
-    //options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    //{
-    //    {
-    //        new OpenApiSecurityScheme
-    //        {
-    //            Reference = new OpenApiReference
-    //            {
-    //                Type = ReferenceType.SecurityScheme,
-    //                Id = "oauth2"
-    //            },
-    //            Scheme = "oauth2",
-    //            Name = "Bearer",
-    //            In = ParameterLocation.Header
-    //        },
-    //        new List<string>()
-    //    }
-    //});
     options.OperationFilter<AuthorizeCheckOperationFilter>();
 });
 
-    
+builder.Services.AddHttpContextAccessor();
+builder.Services.Configure<IdentityOptions>(options =>
+    options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 
 
 var app = builder.Build();
@@ -135,6 +102,7 @@ app.UseRouting();
 
 app.UseCors("AllowAll");
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Add("sub", ClaimTypes.NameIdentifier);
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -1,41 +1,56 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
-using TraineeHelper.Application.LearningSessions.Commands.DeleteLearnignSession;
-using TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
-using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
-using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionList;
 using TraineeHelper.WebApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using TraineeHelper.Application.LearningSessions.Commands.CreateSkill;
-using TraineeHelper.Domain;
 using MediatR;
+using TraineeHelper.Application.Commands;
 
 namespace TraineeHelper.WebApi.Controllers;
 
 [Route("api/[controller]")]
-public class TraineeController : BaseController
+public class TraineeController : ControllerBase
 {
     private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
-    public TraineeController(IMapper mapper) : base()
+    public TraineeController(IMapper mapper, IMediator mediator)
     {
         _mapper = mapper;
+        _mediator = mediator;
     }
 
+    /// <summary>
+    /// Create LearningSession entity
+    /// </summary>
+    /// <param name="createLearningSessionDTO">DTO for creation</param>
+    /// <returns><see cref="ActionResult"/></returns>
+    /// <remarks>
+    /// Sample request
+    /// {
+    ///     "traineeId": "293BD878-4BE0-45EB-9BFE-B00E7D61B6A0",
+    ///     "skillsToLearnIds": 
+    ///     [ "3CA7F061-1E16-4258-8251-28D98AE1A5A7"]
+    /// }
+    /// </remarks>
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<int>> CreateLearningSession([FromBody] CreateLearningSessionDTO createLearningSessionDTO)
+    public async Task<ActionResult> CreateLearningSession([FromBody] CreateLearningSessionDTO createLearningSessionDTO)
     {
         var command = _mapper.Map<CreateLearningSessionCommand>(createLearningSessionDTO);
-        command.Trainee = new Trainee("Bob",new Technology() { Name = "Default Tech"}, null);
-        command.Trainee.Id = TraineeId;
+        //command.Trainee = new Trainee("Bob",new Technology() { Name = "Default Tech"}, null);
+        //command.Trainee.Id = TraineeId;
 
-        var lsId = await Mediator.Send(command);
+        var lsId = await _mediator.Send(command);
         return Ok(lsId);
     }
-    //TODO summary
+    //TODO summary+
+
+    /// <summary>
+    /// Update LearningSession entity
+    /// </summary>
+    /// <param name="updateLearningSessionDTO">DTO for update</param>
+    /// <returns><see cref="ActionResult"/></returns>
+    /// <remarks>
     [HttpPut]
     [Authorize]
     public async Task<ActionResult> UpdateLearningSession([FromBody] UpdateLearningSessionDTO updateLearningSessionDTO)
@@ -46,7 +61,7 @@ public class TraineeController : BaseController
        //command.Trainee = new Trainee("Bob", new Technology() { Name = "Default Tech" }, null);
        // command.Trainee.Id = TraineeId;
 
-        var lsId = await Mediator.Send(command);
+        var lsId = await _mediator.Send(command);
         return Ok(lsId);
     }
 }

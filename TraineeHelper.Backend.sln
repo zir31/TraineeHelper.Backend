@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeHelper.Persistence",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeHelper.WebApi", "TraineeHelper.WebApi\TraineeHelper.WebApi.csproj", "{C6127D7D-E58F-40B9-94FB-2FC5B41027AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraineeHelper.Tests", "TraineeHelper.Tests\TraineeHelper.Tests.csproj", "{B3AEC8BE-EEE5-422B-B282-2FDEC4995539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeHelper.Tests", "TraineeHelper.Tests\TraineeHelper.Tests.csproj", "{B3AEC8BE-EEE5-422B-B282-2FDEC4995539}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4ED0C312-6460-4065-8D91-228738D5EEA6} = {4ED0C312-6460-4065-8D91-228738D5EEA6}
 		{D4894E0A-A768-4125-A5F0-002D44AFC60B} = {D4894E0A-A768-4125-A5F0-002D44AFC60B}

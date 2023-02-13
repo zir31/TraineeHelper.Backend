@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using TraineeHelper.Application.Common.Mappings;
 using TraineeHelper.Application.Interfaces;
 using TraineeHelper.Persistence;
 
@@ -19,8 +18,8 @@ public class QueryTestFixture : IDisposable
         Context = LearningSessionsContextFactory.Create();
         var configurationProvider = new MapperConfiguration(cfg =>
         {
-            cfg.AddProfile(new AssemblyMappingProfile(
-                typeof(ILearningSessionsDbContext).Assembly));
+            //cfg.AddProfile(new AssemblyMappingProfile(
+            //    typeof(ILearningSessionsDbContext).Assembly));
         });
         Mapper = configurationProvider.CreateMapper();
     }

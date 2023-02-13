@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraineeHelper.Domain.Entities;
 
 namespace TraineeHelper.Domain.Status;
 public class LearningState : LearningSessionState

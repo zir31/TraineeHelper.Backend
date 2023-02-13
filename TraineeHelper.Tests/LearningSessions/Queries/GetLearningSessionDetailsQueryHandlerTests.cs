@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TraineeHelper.Persistence;
 using TraineeHelper.Tests.Common;
-using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
 using Shouldly;
 using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
 using TraineeHelper.Domain;
+using TraineeHelper.Application.Queries.LearningSession.GetLearningSessionDetails;
 
 namespace TraineeHelper.Tests.LearningSessions.Queries;
 

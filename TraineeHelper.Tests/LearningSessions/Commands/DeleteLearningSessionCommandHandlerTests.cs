@@ -18,7 +18,7 @@ public class DeleteLearningSessionCommandHandlerTests : TestCommandBase
     public async Task DeleteLearningSessionCommandHandler_Success()
     {
         //Arrange
-        var handler = new DeleteLearningSessionCommandHandler(_context);
+        var handler = new DeleteLearningSessionCommandHandler(_context, );
         await handler.Handle(new DeleteLearningSessionCommand
         {
             Id = LearningSessionsContextFactory.LearningSessionIdForDelete,

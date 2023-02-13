@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TraineeHelper.Application.Interfaces;
-using TraineeHelper.Domain;
+using TraineeHelper.Domain.Entities;
 using TraineeHelper.Persistence.EntityTypeConfigurations;
 
 namespace TraineeHelper.Persistence;
 public class LearningSessionsDbContext : DbContext, ILearningSessionsDbContext
 {
     public DbSet<LearningSession> LearningSessions { get; set; }
+    public DbSet<User> Users { get; set; }
     public DbSet<Trainee> Trainees { get; set; }
+    public DbSet<Mentor> Mentors { get; set; }
     public DbSet<PersonalSkill> PersonalSkills { get; set; }
     public DbSet<Skill> Skills { get; set; }
     public DbSet<Technology> Technologies { get; set; }

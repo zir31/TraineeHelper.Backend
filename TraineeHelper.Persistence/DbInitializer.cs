@@ -1,4 +1,5 @@
 ﻿using TraineeHelper.Domain;
+using TraineeHelper.Domain.Entities;
 
 namespace TraineeHelper.Persistence;
 public class DbInitializer
@@ -11,8 +12,8 @@ public class DbInitializer
         dbContext.Trainees.Add(defaultTrainee);
         dbContext.SaveChanges();
 
-        //defaultTrainee.CreateLearningSession(new List<Skill>());
-
+        var defaultMentor = new Mentor() { Id = Guid.NewGuid(), FullName = "Megamind" };
+        dbContext.Mentors.Add(defaultMentor);
         dbContext.SaveChanges();
     }
 }

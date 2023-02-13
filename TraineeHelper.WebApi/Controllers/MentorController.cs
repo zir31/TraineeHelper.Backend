@@ -1,37 +1,37 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
-using TraineeHelper.Application.LearningSessions.Commands.DeleteLearnignSession;
-using TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
-using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionDetails;
-using TraineeHelper.Application.LearningSessions.Queries.GetLearningSessionList;
 using TraineeHelper.WebApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using TraineeHelper.Application.LearningSessions.Commands.CreateSkill;
-using TraineeHelper.Domain;
+using MediatR;
+using TraineeHelper.Application.Commands;
 
 namespace TraineeHelper.WebApi.Controllers;
 
-[Route("api/[controller]/[action]")]
-public class MentorController : BaseController
+[Route("api/[controller]")]
+public class MentorController : ControllerBase
 {
     private readonly IMapper _mapper;
-    public MentorController(IMapper mapper)
+    private readonly IMediator _mediator;
+    public MentorController(IMapper mapper, IMediator mediator)
     {
         _mapper = mapper;
+        _mediator = mediator;
     }
 
+    /// <summary>
+    /// Create Skill entity
+    /// </summary>
+    /// <param name="createSkillDTO">DTO for creation</param>
+    /// <returns><see cref="ActionResult"/></returns>
+    /// <remarks>
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<int>> CreateSkill(string  skillName, Technology technology)
+    public async Task<ActionResult<int>> CreateSkill([FromBody] CreateSkillDTO createSkillDTO)
     {
-        var sampleMentor = new Mentor() { Id = Guid.NewGuid(), FullName = "Alex" };
-        var createSkillDTO = new CreateSkillDTO() { SkillName = skillName , Mentor = sampleMentor, Technology = technology};
         var command = _mapper.Map<CreateSkillCommand>(createSkillDTO);
         //command.Mentor.Id = TraineeId;
 
-        var lsId = await Mediator.Send(command);
+        var lsId = await _mediator.Send(command);
         return Ok(lsId);
     }
 }

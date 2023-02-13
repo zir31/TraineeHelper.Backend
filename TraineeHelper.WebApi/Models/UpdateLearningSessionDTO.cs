@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
-using TraineeHelper.Application.Common.Mappings;
-using TraineeHelper.Application.LearningSessions.Commands.CreateLearningSession;
-using TraineeHelper.Application.LearningSessions.Commands.UpdateLearningSession;
-using TraineeHelper.Domain;
+using TraineeHelper.Application.Commands;
+using TraineeHelper.Domain.Entities;
 using TraineeHelper.Domain.Status;
 
 namespace TraineeHelper.WebApi.Models;
 
-public class UpdateLearningSessionDTO : IMapWith<UpdateLearningSessionCommand>
+public class UpdateLearningSessionDTO
 {
     //public Trainee Trainee { get; set; }
-    public List<int> SkillsLearned { get; set; }
+    public List<Guid> SkillsLearnedIds { get; set; }
     public LearningSessionState LearningSessionState { get; set; }
 
     public void Mapping(Profile profile)
@@ -21,7 +19,7 @@ public class UpdateLearningSessionDTO : IMapWith<UpdateLearningSessionCommand>
         profile.CreateMap<UpdateLearningSessionDTO, UpdateLearningSessionCommand>()
             .ForMember(lsCommand => lsCommand.LearningSessionState,
             opt => opt.MapFrom(lsDTO => lsDTO.LearningSessionState))
-            .ForMember(lsCommand => lsCommand.SkillsLearned,
-            opt => opt.MapFrom(lsDTO => lsDTO.SkillsLearned));
+            .ForMember(lsCommand => lsCommand.SkillsLearnedIds,
+            opt => opt.MapFrom(lsDTO => lsDTO.SkillsLearnedIds));
     }
 }

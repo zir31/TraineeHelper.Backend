@@ -15,13 +15,13 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         var connectionString = configuration["DbConnection"];
-        services.AddDbContext<LearningSessionsDbContext>(options =>
+        services.AddDbContext<ILearningSessionsDbContext, LearningSessionsDbContext>(options =>
         {
             options.UseSqlite(connectionString);
             options.EnableSensitiveDataLogging(true);
         });
-        services.AddScoped<ILearningSessionsDbContext>(provider =>
-            provider.GetService<LearningSessionsDbContext>());
+        //services.AddScoped<ILearningSessionsDbContext>(provider =>
+        //    provider.GetService<LearningSessionsDbContext>());
         return services;
     }
 }

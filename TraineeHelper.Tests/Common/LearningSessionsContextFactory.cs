@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using TraineeHelper.Domain;
+using TraineeHelper.Domain.Entities;
 using TraineeHelper.Persistence;
 
 namespace TraineeHelper.Tests.Common;

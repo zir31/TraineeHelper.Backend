@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TraineeHelper.Domain;
+using TraineeHelper.Domain.Entities;
 
 namespace TraineeHelper.Persistence.EntityTypeConfigurations;
 public class TraineeConfiguration : IEntityTypeConfiguration<Trainee>
@@ -8,7 +8,7 @@ public class TraineeConfiguration : IEntityTypeConfiguration<Trainee>
     public void Configure(EntityTypeBuilder<Trainee> builder)
     {
         builder.HasMany(trainee => trainee.LearningSessions)
-            .WithOne(ls => ls.Trainee);
+            .WithOne();
 
         builder.HasOne(trainee => trainee.ActiveLearningSession)
             .WithOne()
